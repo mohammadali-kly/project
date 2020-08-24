@@ -1,9 +1,8 @@
 <template>
   <v-form v-model="isValid">
     <v-text-field
-      ref="name"
-      v-model="name"
-      :rules="[() => !!name || 'وارد کردن این مورد الزامی است']"
+      v-model="form.name"
+      :rules="[() => !!form.name || 'وارد کردن این مورد الزامی است']"
       :error-messages="errorMessages"
       label="نام خانوادگی"
       solo
@@ -12,9 +11,8 @@
       prepend-inner-icon="mdi-account"
     ></v-text-field>
     <v-text-field
-      ref="password"
-      v-model="password"
-      :rules="[() => !!password || 'وارد کردن این مورد الزامی است']"
+      v-model="form.phone"
+      :rules="[() => !!form.phone || 'وارد کردن این مورد الزامی است']"
       :error-messages="errorMessages"
       label=" شماره تلفن"
       solo
@@ -22,11 +20,24 @@
       required
       prepend-inner-icon="mdi-cellphone-android"
     ></v-text-field>
+    <v-text-field
+      v-model="form.password"
+      :rules="[() => !!form.password || 'وارد کردن این مورد الزامی است']"
+      :error-messages="errorMessages"
+      label="رمز عبور"
+      solo
+      rounded
+      required
+      prepend-inner-icon="mdi-eye-off"
+    ></v-text-field>
     <v-row justify="center">
-      <v-btn @click="$emit('change-mode')">تایید</v-btn>
+      <v-btn @click="$emit('change-mode')">ثبت نام</v-btn>
     </v-row>
-    <v-row justify="center" class="mt-2">
-      <nuxt-link class="white--text" to="/">وارد شوید</nuxt-link>
+    <v-row justify="center" class="mt-4">
+      <v-btn dark depressed text to="/">
+        <v-icon class="ml-2">mdi-home</v-icon>
+        <span class="white--text">وارد شوید</span>
+      </v-btn>
     </v-row>
   </v-form>
 </template>
@@ -35,12 +46,16 @@
 export default {
   data() {
     return {
-      name: "",
-      password: "",
+      form: {
+        name: "",
+        phone: "",
+        password: "",
+      },
       errorMessages: "",
       isValid: false,
     };
   },
+  methods: {},
 };
 </script>
 

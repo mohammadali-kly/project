@@ -12,7 +12,7 @@
       prepend-inner-icon="mdi-account"
     ></v-text-field>
     <v-row justify="center">
-      <v-btn>تایید</v-btn>
+      <v-btn >تایید</v-btn>
     </v-row>
   </v-form>
 </template>

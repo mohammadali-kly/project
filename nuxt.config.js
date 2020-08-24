@@ -7,6 +7,11 @@ export default {
   target: 'server',
   
   head: {
+    script: [
+      {
+        src: 'imageMapResizer.min.js'
+      }
+    ],
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
     meta: [
@@ -38,19 +43,27 @@ export default {
   ],
 
   auth: {
+
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+          login: { url: '/login', method: 'post', propertyName: 'access_token' },
+          logout: { url: '/logout', method: 'post' },
+          user: { url: '/user', method: 'get' , propertyName: 'user'}
         },
       }
-    }
+    },
+
+    redirect: {
+      login: '/auth/login',
+      home: '/level/4',
+    },
   },
 
-  axios: {},
-  
+  axios: {
+    baseURL: 'http://ad5d960e6cad.ngrok.io/api',
+  },
+
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     rtl:true,

@@ -8,9 +8,8 @@
       <v-col cols="12">
         <v-form v-model="isValid">
           <v-text-field
-            ref="name"
-            v-model="name"
-            :rules="[() => !!name || 'وارد کردن این مورد الزامی است']"
+            v-model="form.phone"
+            :rules="[() => !!form.phone || 'وارد کردن این مورد الزامی است']"
             :error-messages="errorMessages"
             label="شماره تلفن"
             solo
@@ -19,9 +18,8 @@
             prepend-inner-icon="mdi-cellphone-iphone"
           ></v-text-field>
           <v-text-field
-            ref="name"
-            v-model="password"
-            :rules="[() => !!password || 'وارد کردن این مورد الزامی است']"
+            v-model="form.password"
+            :rules="[() => !!form.password || 'وارد کردن این مورد الزامی است']"
             :error-messages="errorMessages"
             label="رمز عبور"
             solo
@@ -30,7 +28,7 @@
             prepend-inner-icon="mdi-eye-off"
           ></v-text-field>
           <v-row justify="center">
-            <v-btn @click="login">ورود</v-btn>
+            <v-btn @click="login" :loading="loading" prepend-inner-icon="mdi-login">ورود</v-btn>
           </v-row>
           <v-row justify="center" class="mt-2">
             <nuxt-link to="/register" class="white--text">ثبت نام کنید</nuxt-link>
@@ -45,17 +43,31 @@
 export default {
   data() {
     return {
-      name: "",
-      password: "",
+      form: {
+        phone: "",
+        password: "",
+      },
       errorMessages: "",
       isValid: false,
+      loading: false,
     };
   },
   methods: {
     login() {
-      this.$axios.$get("https://api.github.com/events").then((response) => {
-        console.log(response);
+      this.loading = true;
+
+      this.$auth.loginWith("local", { data: this.form })
+      .then((response) => {
+        this.$router.push("/level");
+      })
+      .catch((error)=>{
+        
+      })
+      .finally(()=>{
+        this.loading = false;
       });
+
+
     },
   },
 };
