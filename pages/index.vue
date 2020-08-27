@@ -41,6 +41,10 @@
 
 <script>
 export default {
+  created(){
+    this.$router.push('/level');
+  },
+
   data() {
     return {
       form: {

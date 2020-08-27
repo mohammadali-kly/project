@@ -1,15 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
- 
+
   mode: 'spa',
 
   target: 'server',
-  
+
   head: {
     script: [
       {
-        src: 'imageMapResizer.min.js'
+        src: '/imageMapResizer.min.js'
       }
     ],
     titleTemplate: '%s - ' + process.env.npm_package_name,
@@ -23,19 +23,19 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  
+
   css: [
   ],
- 
+
   plugins: [
   ],
- 
+
   components: true,
- 
+
   buildModules: [
     '@nuxtjs/vuetify',
   ],
-  
+
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
@@ -49,7 +49,7 @@ export default {
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'access_token' },
           logout: { url: '/logout', method: 'post' },
-          user: { url: '/user', method: 'get' , propertyName: 'user'}
+          user: { url: '/user', method: 'get', propertyName: 'user' }
         },
       }
     },
@@ -66,7 +66,7 @@ export default {
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    rtl:true,
+    rtl: true,
     theme: {
       dark: false,
       themes: {
@@ -82,7 +82,7 @@ export default {
       }
     }
   },
-  
+
   build: {
   }
 }
